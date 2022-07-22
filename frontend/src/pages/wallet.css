@@ -28,9 +28,12 @@
 }
 
 .wallettable{
-	border-width: 1px;
+	width: 100%;
+	border-width: 2px;
 	border-style: solid;
 	border-radius: 5px;
+	padding: 5px;
+	background-color: #ACC8E5;
 }
 
 .walletdiv{
@@ -39,4 +42,19 @@
 
 .walletlogo{
 	width: 10%;
+}
+
+.removelogo{
+	width: 30px;
+}
+
+.row1{
+	width:  10%;
+}
+.row2{
+	padding-left: 5px;
+	width:  90%;
+}
+.row3{
+	width:  10%;
 }
