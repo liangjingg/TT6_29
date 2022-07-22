@@ -3,12 +3,12 @@ module.exports = app => {
     const currency = require("../controllers/currency_controller.js");
     const wallet = require("../controllers/wallet_controller");
     const exchangeRate = require('../controllers/exchangerate_controller.js')
+    const transaction = require("../controllers/transaction_controller.js");
     const authentication = require('../controllers/authentication_controller.js')
   
     var router = require("express").Router();
   
     // Currency Controller
-
     // Retrieve all currency data based on user id
     router.get("/currency/:id", currency.findAllWalletCurrency);
     router.delete("/currency/:id", currency.delete);
@@ -20,6 +20,10 @@ module.exports = app => {
     // Exchange Rate Routes
     router.get('/exchange',exchangeRate.findAllExchangeRates)
 
+    // Transaction Controller
+    // Insert transaction into db
+    router.post("/transaction", transaction.insertTransaction);
+    
     // Auth routes
     router.post('/auth/login',authentication.login)
     router.get('/auth/logout',authentication.logout)
