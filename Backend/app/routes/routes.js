@@ -10,6 +10,7 @@ module.exports = app => {
 
     // Retrieve all currency data based on user id
     router.get("/currency/:id", currency.findAllWalletCurrency);
+    router.delete("/currency/:id", currency.delete);
     router.get("/wallet/:id", wallet.findAllByUserID);
     router.delete("/wallet/:id", wallet.delete);
     router.post("/wallet/", wallet.create);

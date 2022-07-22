@@ -22,3 +22,19 @@ exports.findAllWalletCurrency = (req, res) => {
       });
     });
 };
+
+// Delete an item with the specified id in the request
+exports.delete = (req, res) => {
+  console.log("id: " + req.params.id);
+  Currency.destroy({ where: { id: req.params.id}})
+  .then(result => {
+        res.status(200).json({
+            message: "Currency deleted"
+        })
+    })
+  .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+};
