@@ -4,6 +4,7 @@ module.exports = app => {
     const wallet = require("../controllers/wallet_controller");
     const exchangeRate = require('../controllers/exchangerate_controller.js')
     const transaction = require("../controllers/transaction_controller.js");
+    const authentication = require('../controllers/authentication_controller.js')
   
     var router = require("express").Router();
   
@@ -22,6 +23,11 @@ module.exports = app => {
     // Transaction Controller
     // Insert transaction into db
     router.post("/transaction", transaction.insertTransaction);
+    
+    // Auth routes
+    router.post('/auth/login',authentication.login)
+    router.get('/auth/logout',authentication.logout)
+    router.post('/auth/register',authentication.register)
 
     // Base route
     app.use('/api', router);
