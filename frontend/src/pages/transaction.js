@@ -103,7 +103,7 @@ function Transaction(){
   const updateInputCurrency = (event) => {
     setInputCurrency(event.target.value);
     exchangeRateData.map((x) => {
-      if(x.base_currency===inputCurrency && x.exchange_currency===outputCurrency){
+      if(x.base_currency===event.target.value && x.exchange_currency===outputCurrency){
         setExchangedValue((inputValue*x.rate).toFixed(3));
       }
     })
@@ -111,7 +111,7 @@ function Transaction(){
   const updateOutputCurrency = (event) => {
     setOutputCurrency(event.target.value);
     exchangeRateData.map((x) => {
-      if(x.base_currency===inputCurrency && x.exchange_currency===outputCurrency){
+      if(x.base_currency===inputCurrency && x.exchange_currency===event.target.value){
         setExchangedValue((inputValue*x.rate).toFixed(3));
       }
     })

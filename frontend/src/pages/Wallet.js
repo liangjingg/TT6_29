@@ -40,6 +40,8 @@ function Wallet(){
   }
 ]); 
 
+  
+
   const removeWallet = () => {
     if(window.confirm("Please confirm that you are deleting this wallet")==true){
 
