@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
+var corsOptions = {
+  origin: "http://localhost:5000"
+};
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const dotenv = require("dotenv")
@@ -17,7 +21,8 @@ require("./app/routes/routes.js")(app);
 const db = require("./app/models");
 db.sequelize.sync();
 
-//to fix CORS erros
+//to fix CORS errors
+app.use(cors(corsOptions));
 app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
