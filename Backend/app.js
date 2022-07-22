@@ -4,16 +4,14 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const dotenv = require("dotenv")
 
-const walletRoutes = require('./app/controllers/wallet');
-
 // Load .env variables
 dotenv.config()
 
-// Define backend routes
-require("./app/routes/routes")(app);
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Define backend routes
+require("./app/routes/routes.js")(app);
 
 // Connect to sequelize
 const db = require("./app/models");
@@ -29,8 +27,6 @@ app.use((req, res, next) =>{
     }
     next();
 });
-
-app.use('/wallet', walletRoutes);
 
 //Error when page is not found
 app.use((req, res, next) => {
