@@ -7,20 +7,15 @@ const dotenv = require("dotenv")
 // Load .env variables
 dotenv.config()
 
+// Define backend routes
+require("./app/routes/routes")(app);
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Connect to sequelize
 const db = require("./app/models");
 db.sequelize.sync();
-
-//DB connect
-const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
 
 //to fix CORS erros
 app.use((req, res, next) =>{
@@ -45,8 +40,7 @@ app.use((error, req, res, next) => {
     res.status(error.status || 500);
      res.json({
         error: {
-            message: error.message,
-            message2: rows
+            message: error.message
         }
     });
 });

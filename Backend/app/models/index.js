@@ -4,7 +4,7 @@ const Sequelize = require("sequelize");
 // Load .env variables
 dotenv.config()
 
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
+const sequelize = new Sequelize(process.env.DATABASE, process.env.DB, process.env.PASSWORD, {
   host: process.env.HOST,
   dialect: "mysql",
   operatorsAliases: false,
@@ -17,7 +17,10 @@ const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, proc
 });
 
 const db = {};
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
 db.currency = require("./currency.js")(sequelize, Sequelize.DataTypes);
+
 module.exports = db;
