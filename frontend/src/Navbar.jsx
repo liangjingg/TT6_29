@@ -11,6 +11,9 @@ function Navbar() {
         <li>
           <Link to="/wallet">Wallet</Link>
         </li>
+        <li>
+          <Link to="/transaction">Transaction</Link>
+        </li>
       </ul>
     </nav>
   );
