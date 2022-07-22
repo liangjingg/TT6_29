@@ -132,10 +132,13 @@ function Transaction(){
   useEffect(() => {
     setTimeout(() => {
       // alert(count);
-      fetchExchangeRate();
       setCount((count) => count + 1);
     }, 1000);
   });
+
+  useEffect(() => {
+    fetchExchangeRate();
+  }, []);
 
   return (
     <div>
