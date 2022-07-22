@@ -26,7 +26,7 @@ module.exports = app => {
     
     // Auth routes
     router.post('/auth/login',authentication.login)
-    router.get('/auth/logout',authentication.logout)
+    router.get('/auth/logout',authentication.protect,authentication.logout)
     router.post('/auth/register',authentication.register)
 
     // Base route
