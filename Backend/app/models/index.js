@@ -22,6 +22,6 @@ db.sequelize = sequelize;
 db.currency = require("./currency.js")(sequelize, Sequelize.DataTypes);
 db.wallet = require("./wallet.js")(sequelize, Sequelize.DataTypes);
 db.exchange_rate = require("./exchange_rate.js")(sequelize, Sequelize.DataTypes);
-
+db.user = require("./user.js")(sequelize, Sequelize.DataTypes);
 
 module.exports = db;
