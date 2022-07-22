@@ -1,4 +1,4 @@
-import React, {useState,} from 'react';
+import React, {useState,useEffect} from 'react';
 import './wallet.css';
 import logo from './currencypeople2.png';
 import walletlogo from './wallet.png';
@@ -11,6 +11,7 @@ import removeclose from './remove-close.png';
 function Wallet(){
   const [userid, setUserId] = useState(1);
   const [walletAmt, setWalletAmt] = useState(3);
+  const [count, setCount] = useState(0);
   const [walletData, setWalletData] = useState([
   {
     "id": 1,
@@ -46,6 +47,21 @@ function Wallet(){
 
     }
   }
+
+  const fetchWallet = () => {
+    fetch('http://localhost:5000/api/wallet/1')
+    .then(response => response.json())
+    .then(responseJson => setWalletData(JSON.stringify(responseJson)));
+  }
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      // alert(count);
+      fetchWallet();
+      setCount((count) => count + 1);
+    }, 1000);
+  });
 
   const dataRowView = (item, key) => {
     return (

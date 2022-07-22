@@ -80,8 +80,11 @@ function Transaction(){
   }
 ]);
 
-  const fetchExchangeRate = () => {
 
+  const fetchExchangeRate = () => {
+    fetch('http://localhost:5000/api/exchange')
+    .then(response => response.json())
+    .then(responseJson => setExchangeRateData(JSON.stringify(responseJson)));
   }
 
   const updateInputValue = (event) => {
@@ -129,6 +132,7 @@ function Transaction(){
   useEffect(() => {
     setTimeout(() => {
       // alert(count);
+      fetchExchangeRate();
       setCount((count) => count + 1);
     }, 1000);
   });
