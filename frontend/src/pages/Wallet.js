@@ -39,8 +39,153 @@ function Wallet(){
     "name": "Trip to Japan"
   }
 ]); 
-
-  
+  const [individualWalletData, setIndividualWalletData] = useState([
+  {
+    "id": 1,
+    "wallet_id": 1,
+    "currency": "SGD",
+    "amount": 4294.50
+  },
+  {
+    "id": 2,
+    "wallet_id": 1,
+    "currency": "CAD",
+    "amount": 5687.65
+  },
+  {
+    "id": 3,
+    "wallet_id": 1,
+    "currency": "CNH",
+    "amount": 6063.14
+  },
+  {
+    "id": 4,
+    "wallet_id": 1,
+    "currency": "EUR",
+    "amount": 8089.82
+  },
+  {
+    "id": 5,
+    "wallet_id": 1,
+    "currency": "HKD",
+    "amount": 7862.36
+  },
+  {
+    "id": 6,
+    "wallet_id": 1,
+    "currency": "JPY",
+    "amount": 5759.15
+  },
+  {
+    "id": 7,
+    "wallet_id": 1,
+    "currency": "NZD",
+    "amount": 6943.26
+  },
+  {
+    "id": 8,
+    "wallet_id": 1,
+    "currency": "NOK",
+    "amount": 4038.10
+  },
+  {
+    "id": 9,
+    "wallet_id": 1,
+    "currency": "GBP",
+    "amount": 8287.33
+  },
+  {
+    "id": 10,
+    "wallet_id": 1,
+    "currency": "SEK",
+    "amount": 5126.40
+  },
+  {
+    "id": 11,
+    "wallet_id": 1,
+    "currency": "THB",
+    "amount": 147.62
+  },
+  {
+    "id": 12,
+    "wallet_id": 1,
+    "currency": "USD",
+    "amount": 7331.77
+  },
+  {
+    "id": 13,
+    "wallet_id": 2,
+    "currency": "SGD",
+    "amount": 485.19
+  },
+  {
+    "id": 14,
+    "wallet_id": 2,
+    "currency": "CAD",
+    "amount": 2634.58
+  },
+  {
+    "id": 15,
+    "wallet_id": 2,
+    "currency": "CNH",
+    "amount": 3893.29
+  },
+  {
+    "id": 16,
+    "wallet_id": 2,
+    "currency": "EUR",
+    "amount": 3887.15
+  },
+  {
+    "id": 17,
+    "wallet_id": 2,
+    "currency": "HKD",
+    "amount": 4065.34
+  },
+  {
+    "id": 18,
+    "wallet_id": 2,
+    "currency": "JPY",
+    "amount": 1702.47
+  },
+  {
+    "id": 19,
+    "wallet_id": 2,
+    "currency": "NZD",
+    "amount": 3299.38
+  },
+  {
+    "id": 20,
+    "wallet_id": 2,
+    "currency": "NOK",
+    "amount": 7681.32
+  },
+  {
+    "id": 21,
+    "wallet_id": 2,
+    "currency": "GBP",
+    "amount": 3720.37
+  },
+  {
+    "id": 22,
+    "wallet_id": 2,
+    "currency": "SEK",
+    "amount": 4511.50
+  },
+  {
+    "id": 23,
+    "wallet_id": 2,
+    "currency": "THB",
+    "amount": 6216.60
+  },
+  {
+    "id": 24,
+    "wallet_id": 2,
+    "currency": "USD",
+    "amount": 9103.66
+  }
+]);
+  const [selectedWalletId, setSelectedWalletId] = useState(0);
 
   const removeWallet = () => {
     if(window.confirm("Please confirm that you are deleting this wallet")==true){
@@ -68,9 +213,13 @@ function Wallet(){
     fetchWallet();
   }, []);
 
+  const showIndividualWallet = (walletId) =>{
+    setSelectedWalletId(walletId);
+  }
+
   const dataRowView = (item, key) => {
     return (
-      <div>
+      <div onClick={() => showIndividualWallet(item.id)}>
         {item.user_id == userid ? 
         <div>
           <div class="walletdiv">
@@ -88,6 +237,13 @@ function Wallet(){
                 <p>{item.name}</p>
               </td>        
             </tr>
+            <tr>
+            { item.id == selectedWalletId?
+              individualWalletData.map(individualRowView)
+              :
+              <div></div>
+            }
+            </tr>
             </table>
           </div>
         </div>:
@@ -96,6 +252,19 @@ function Wallet(){
       </div> 
     );
   };
+
+  const individualRowView = (item, key) =>{
+    return(
+    <div class="currencydiv">
+      {
+        item.wallet_id == selectedWalletId ?
+        <p>{item.currency}{" "}{item.amount}</p>
+        :
+        <div></div>
+      }
+    </div>
+    )
+  }
 
   return (
     <div>
@@ -113,7 +282,7 @@ function Wallet(){
           </tr>
         </table>
       </div>
-      { walletData.map(dataRowView)}
+      { walletData.map(dataRowView) }
     </div>
   );
 };
