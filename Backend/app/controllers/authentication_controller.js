@@ -21,8 +21,6 @@ const createAndSendToken = (user, req, res) => {
 
   res.cookie('jwt', token, cookieOptions);
 
-  user.password = undefined;
-
   return token
 };
 
@@ -70,14 +68,12 @@ exports.protect = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     // 3) Check if user still exists
     const currentUser = await User.findOne({ where: { id: decoded.id}});
-    
+
     if (!currentUser) {
       res.status(401).json({
         message: "No found user with this token"
       })
     }
-    req.user = currentUser;
-    res.locals.user = currentUser;
     next();
 };  
 
