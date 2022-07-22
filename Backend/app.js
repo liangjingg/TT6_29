@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const dotenv = require("dotenv")
 
+const walletRoutes = require('./app/controllers/wallet');
+
 // Load .env variables
 dotenv.config()
 
@@ -13,14 +15,6 @@ app.use(bodyParser.json());
 // Connect to sequelize
 const db = require("./app/models");
 db.sequelize.sync();
-
-//DB connect
-const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
 
 //to fix CORS erros
 app.use((req, res, next) =>{
@@ -32,6 +26,8 @@ app.use((req, res, next) =>{
     }
     next();
 });
+
+app.use('/wallet', walletRoutes);
 
 //Error when page is not found
 app.use((req, res, next) => {
