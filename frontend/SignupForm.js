@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import App from './Login';
 import validation from './validation';
+import { useNavigate } from "react-router-dom";
+
 const SignupForm = ({submitForm})  => {
     const [values, setValues] = useState({
         fullname: "",
@@ -54,6 +57,7 @@ const [dataIsCorrect, setDataIsCorrect] = useState(false);
                 <div>
                     <button className="submit" onClick ={handleFormSubmit}>Signup</button>
                 </div>
+                    
             </form>
         </div>
         
