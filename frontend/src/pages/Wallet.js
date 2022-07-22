@@ -42,6 +42,7 @@ function Wallet(){
 
   const removeWallet = () => {
     if(window.confirm("Please confirm that you are deleting this wallet")==true){
+
       alert("deleted");
     }else{
 
@@ -54,14 +55,16 @@ function Wallet(){
     .then(responseJson => setWalletData(JSON.stringify(responseJson)));
   }
 
-
   useEffect(() => {
     setTimeout(() => {
       // alert(count);
-      fetchWallet();
       setCount((count) => count + 1);
     }, 1000);
   });
+
+  useEffect(() => {
+    fetchWallet();
+  }, []);
 
   const dataRowView = (item, key) => {
     return (
