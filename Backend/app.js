@@ -2,16 +2,24 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const dotenv = require("dotenv")
+
+// Load .env variables
+dotenv.config()
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Connect to sequelize
+const db = require("./app/models");
+db.sequelize.sync();
+
 //DB connect
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'user',
-    password: 'Password123456',
-    database: ''
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 });
 
 //to fix CORS erros
