@@ -9,6 +9,9 @@ const walletRoutes = require('./app/controllers/wallet');
 // Load .env variables
 dotenv.config()
 
+// Define backend routes
+require("./app/routes/routes")(app);
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -41,8 +44,7 @@ app.use((error, req, res, next) => {
     res.status(error.status || 500);
      res.json({
         error: {
-            message: error.message,
-            message2: rows
+            message: error.message
         }
     });
 });
