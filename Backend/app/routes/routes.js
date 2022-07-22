@@ -3,8 +3,7 @@ module.exports = app => {
     const currency = require("../controllers/currency_controller.js");
     const wallet = require("../controllers/wallet_controller");
     const exchangeRate = require('../controllers/exchangerate_controller.js')
-    const authentication = require('../controllers/authentication_controller.js')
-
+  
     var router = require("express").Router();
   
     // Currency Controller
@@ -19,11 +18,6 @@ module.exports = app => {
 
     // Exchange Rate Routes
     router.get('/exchange',exchangeRate.findAllExchangeRates)
-
-    // Auth Routes
-    router.post('/auth/login',authentication.login)
-    router.get('/auth/logout',authentication.logout)
-    router.post('/auth/register',authentication.register)
 
     // Base route
     app.use('/api', router);
